@@ -19,16 +19,18 @@ class FlickrClient {
         return "&bbox=\(minLon),\(minLat),\(maxLon),\(maxLat)"
     }
     
-    class func getSearchResult(pin: Pin, completion: @escaping ([FlickrPhoto]?, Error?)->Void) {
-        let url = URL(string: base + "\(bbox(pin: pin))" + "&page=\(Int.random(in: 1...10))")!
-        print(url)
+    class func getSearchResult(pin: Pin, completion: @escaping ([FlickrPhoto]?, Error?) -> Void) {
+        let page = Int.random(in: 1...10)
+        let boundingBox = bbox(pin: pin)
+        let urlString = base + "\(boundingBox)" + "&page=\(page)"
+        let url = URL(string: urlString)
+        
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if error != nil {
-                fatalError("Error getting search result \(error!.localizedDescription)")
+                fatalError(error?.localizedDescription as! String)
             }
             do {
                 let decoder = JSONDecoder()
-                //print(String(data: data!, encoding: .utf8) as Any)
                 let responseObject = try decoder.decode(FlickrData.self, from: data!)
                 DispatchQueue.main.async {
                     completion(responseObject.photos.photo, nil)
@@ -41,7 +43,7 @@ class FlickrClient {
         task.resume()
     }
     
-    class func downloadPicture(imageURL: URL , pin: Pin, completion: @escaping (Data?, Error?)->Void) {
+    class func downloadPicture(imageURL: URL, pin: Pin, completion: @escaping (Data?, Error?) -> Void) {
         let task = URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
             guard let data = data else {
                 fatalError("Error downloading pictures: \(error!.localizedDescription)")

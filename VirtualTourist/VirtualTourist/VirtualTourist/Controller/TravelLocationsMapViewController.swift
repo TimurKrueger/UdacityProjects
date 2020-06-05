@@ -10,6 +10,11 @@ import UIKit
 import MapKit
 
 class TravelLocationsViewController: UIViewController, MKMapViewDelegate {
+
+    @IBOutlet weak var mapView: MKMapView!
+    var taggedAnnotation: MKAnnotation!
+    let dataContainer = DataContainer(containerName: "VirtualTourist")
+    var pins: [Pin] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -13,6 +13,6 @@ Project 3 - MemeMe 2.0
 
 Project 4 - OnTheMap
 
-Project 5 - VirtualTourist
+Project 5 - VirtualTourist (TODO)
 
-Project 6 - FitnessTracker
+Project 6 - FitnessTracker (TODO)

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Meme Editor View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="MemeEditor" id="BYZ-38-t0r" customClass="MemeEditorViewController" customModule="MemeMeApp_1_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jhM-Tw-awz">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="MemeMe 1.0" id="26e-cV-tmv">
+                                        <barButtonItem key="leftBarButtonItem" title="Share" image="square.and.arrow.up" catalog="system" id="Ifi-4P-Jr3" userLabel="Share Button">
+                                            <connections>
+                                                <action selector="shareMeme:" destination="BYZ-38-t0r" id="jlx-YB-TMM"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Reset" id="wSy-ND-y4l" userLabel="Reset Button">
+                                            <connections>
+                                                <action selector="resetMeme:" destination="BYZ-38-t0r" id="vuQ-fg-lCH"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="j9K-5q-Bw1">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem image="camera" catalog="system" id="4Ic-53-4hE" userLabel="Table View">
+                                        <connections>
+                                            <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="JQI-Nz-lrO"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Album" id="8HA-3g-XBx" userLabel="Collection View">
+                                        <connections>
+                                            <action selector="pickAnImageFromLibrary:" destination="BYZ-38-t0r" id="3Qg-wg-slj"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qTd-Ns-rpJ">
+                                <rect key="frame" x="0.0" y="44" width="375" height="579"/>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="topTextfield" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="fbi-yu-I3a" userLabel="Top Textfield">
+                                <rect key="frame" x="10" y="74" width="355" height="57.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="bottomTextfield" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="1b2-FK-YWf" userLabel="Bottom Textfield">
+                                <rect key="frame" x="10" y="535.5" width="355" height="57.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="1b2-FK-YWf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0lg-xa-XjA"/>
+                            <constraint firstItem="j9K-5q-Bw1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="3OE-AJ-pgs"/>
+                            <constraint firstItem="qTd-Ns-rpJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="C6I-ba-J2f"/>
+                            <constraint firstItem="qTd-Ns-rpJ" firstAttribute="trailing" secondItem="fbi-yu-I3a" secondAttribute="trailing" constant="10" id="E1B-YL-ZwG"/>
+                            <constraint firstItem="j9K-5q-Bw1" firstAttribute="top" secondItem="qTd-Ns-rpJ" secondAttribute="bottom" symbolic="YES" id="Ggh-jn-Ui9"/>
+                            <constraint firstItem="fbi-yu-I3a" firstAttribute="top" secondItem="qTd-Ns-rpJ" secondAttribute="top" constant="30" id="Jfh-UH-4ej"/>
+                            <constraint firstItem="qTd-Ns-rpJ" firstAttribute="bottom" secondItem="1b2-FK-YWf" secondAttribute="bottom" constant="30" id="QRA-ru-bfb"/>
+                            <constraint firstItem="qTd-Ns-rpJ" firstAttribute="top" secondItem="jhM-Tw-awz" secondAttribute="bottom" symbolic="YES" id="Qeh-7l-Ht9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qTd-Ns-rpJ" secondAttribute="trailing" id="SGL-mD-CV0"/>
+                            <constraint firstItem="j9K-5q-Bw1" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="WwI-Ji-Q1Z"/>
+                            <constraint firstItem="jhM-Tw-awz" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="YtR-Cj-s5f"/>
+                            <constraint firstItem="1b2-FK-YWf" firstAttribute="leading" secondItem="qTd-Ns-rpJ" secondAttribute="leading" constant="10" id="dI6-Um-fZ9"/>
+                            <constraint firstItem="jhM-Tw-awz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="eK0-Jo-ETU"/>
+                            <constraint firstItem="qTd-Ns-rpJ" firstAttribute="trailing" secondItem="1b2-FK-YWf" secondAttribute="trailing" constant="10" id="gVi-7W-LdV"/>
+                            <constraint firstItem="j9K-5q-Bw1" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="pEJ-0K-iYL"/>
+                            <constraint firstItem="fbi-yu-I3a" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vEl-Oe-jCD"/>
+                            <constraint firstItem="fbi-yu-I3a" firstAttribute="leading" secondItem="qTd-Ns-rpJ" secondAttribute="leading" constant="10" id="wNe-aU-UMD"/>
+                            <constraint firstItem="jhM-Tw-awz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="z8X-n4-bnZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="bottomTextfield" destination="1b2-FK-YWf" id="900-zE-r5e"/>
+                        <outlet property="cameraButton" destination="4Ic-53-4hE" id="6tf-EN-2PU"/>
+                        <outlet property="imagePickerView" destination="qTd-Ns-rpJ" id="CUd-ld-OI2"/>
+                        <outlet property="libraryButton" destination="8HA-3g-XBx" id="fXV-WE-Xq8"/>
+                        <outlet property="navigationBar" destination="jhM-Tw-awz" id="dIU-iZ-PWo"/>
+                        <outlet property="resetButton" destination="wSy-ND-y4l" id="Q6w-gG-GYd"/>
+                        <outlet property="shareButton" destination="Ifi-4P-Jr3" id="yzF-oO-bV0"/>
+                        <outlet property="toolBar" destination="j9K-5q-Bw1" id="Rvm-bC-YLk"/>
+                        <outlet property="topTextfield" destination="fbi-yu-I3a" id="OZ7-le-i6p"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="122.54464285714285"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="camera" catalog="system" width="128" height="96"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+    </resources>
+</document>

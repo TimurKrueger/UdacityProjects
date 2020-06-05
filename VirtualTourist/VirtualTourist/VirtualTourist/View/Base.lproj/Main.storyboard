@@ -47,6 +47,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Virtual Tourist" id="Guf-Nf-ZNM"/>
                     <connections>
+                        <outlet property="mapView" destination="5rV-4f-LZy" id="dki-2x-Myc"/>
                         <segue destination="VSd-VQ-dz8" kind="show" identifier="showPhotoAlbum" id="b4e-9R-xDn"/>
                     </connections>
                 </viewController>
@@ -123,6 +124,11 @@
                         <viewLayoutGuide key="safeArea" id="u1s-qa-ZGq"/>
                     </view>
                     <navigationItem key="navigationItem" title="Photos" id="kwf-xL-tha"/>
+                    <connections>
+                        <outlet property="collectionView" destination="tAV-Fj-DuL" id="ptj-9v-9af"/>
+                        <outlet property="newCollection" destination="E0C-Yl-QCp" id="yIH-bU-eOm"/>
+                        <outlet property="noPicture" destination="rVh-tB-xH9" id="Q2W-mq-1JS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="adD-Q0-ttk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

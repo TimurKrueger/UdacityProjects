@@ -5,7 +5,6 @@
 //  Created by Timur Krüger on 05.06.20.
 //  Copyright © 2020 Timur. All rights reserved.
 //
-import Foundation
 
 struct FlickrData: Decodable {
   let photos: FlickrPhotos

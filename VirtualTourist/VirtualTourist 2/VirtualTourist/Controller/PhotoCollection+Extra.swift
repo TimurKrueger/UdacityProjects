@@ -1,40 +1,14 @@
 //
-//  PhotoAlbum+Extra.swift
+//  PhotoCollection+Extra.swift
 //  VirtualTourist
 //
-//  Created by Timur Krüger on 05.06.20.
+//  Created by Timur Krüger on 07.06.20.
 //  Copyright © 2020 Timur. All rights reserved.
 //
 
-import UIKit
 import CoreData
 
-extension PhotoAlbumViewController: UICollectionViewDataSource, NSFetchedResultsControllerDelegate {
-    
-    // MARK: - UICollectionViewDataSource
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-         return 1
-     }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchedResultsController.fetchedObjects?.count ?? 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as! PhotoCell
-        
-        cell.imageView.image = UIImage(named: "VirtualTourist_100")
-
-        if let image = fetchedResultsController.object(at: indexPath).file {
-            cell.imageView.image = UIImage(data: image)
-        }
-        return cell
-    }
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.dataContainer.viewContext.delete(self.fetchedResultsController.object(at: indexPath))
-        try! self.dataContainer.viewContext.save()
-    }
+extension PhotoCollectionViewController {
     
     // MARK: - NSFetchedResultsControllerDelegate
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {

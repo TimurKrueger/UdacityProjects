@@ -6,8 +6,13 @@
 //  Copyright © 2020 Timur. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class DetailViewController: UIViewController {
     
+    var currentGame: IGDBData!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }

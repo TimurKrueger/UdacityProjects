@@ -3,18 +3,6 @@ import PlaygroundSupport
 
 // this line tells the Playground to execute indefinitely
 PlaygroundPage.current.needsIndefiniteExecution = true
-/*
-let urlString = "http://quotes.rest/qod.json?category=inspire"
-let url = URL(string: urlString)
-let request = URLRequest(url: url!)
-let session = URLSession.shared
-let task = session.dataTask(with: request) { data, response, error in
-    if error != nil { // Handle error
-        return
-    }
-    print(String(data: data!, encoding: .utf8)!)
-}
-task.resume()*/
 
 let url = URL(string: "https://api-v3.igdb.com/games")!
 var requestHeader = URLRequest(url: url)

@@ -43,6 +43,15 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Uxw-Pq-bnm" id="d4B-oB-F55">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9g-hi-8OX">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -71,34 +80,52 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rue-uo-5Xt">
                                 <rect key="frame" x="0.0" y="88" width="414" height="228"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="h6d-3G-QHU">
-                                <rect key="frame" x="0.0" y="324" width="414" height="538"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="EP7-pj-g2h">
+                                <rect key="frame" x="20" y="346" width="374" height="281"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kg7-PC-Ttj" userLabel="Name">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="517.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of Game" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEN-gw-YBY">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="93.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WTZ-1G-HOu">
-                                        <rect key="frame" x="0.0" y="517.5" width="414" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdG-gd-QGJ">
+                                        <rect key="frame" x="0.0" y="93.5" width="374" height="94"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genre" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KF7-6o-CTv">
+                                        <rect key="frame" x="0.0" y="187.5" width="374" height="93.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gsc-ee-Cgb">
+                                <rect key="frame" x="20" y="722" width="374" height="45"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
+                                <state key="normal" title="Visit Game Site">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="D4J-hg-ldV" firstAttribute="trailing" secondItem="Gsc-ee-Cgb" secondAttribute="trailing" constant="20" id="ALw-F1-Ldb"/>
                             <constraint firstItem="rue-uo-5Xt" firstAttribute="top" secondItem="D4J-hg-ldV" secondAttribute="top" id="Gp0-35-tSY"/>
-                            <constraint firstItem="h6d-3G-QHU" firstAttribute="top" secondItem="rue-uo-5Xt" secondAttribute="bottom" constant="8" id="WHw-6X-880"/>
+                            <constraint firstItem="Gsc-ee-Cgb" firstAttribute="leading" secondItem="D4J-hg-ldV" secondAttribute="leading" constant="20" id="Irh-WW-kmg"/>
+                            <constraint firstItem="EP7-pj-g2h" firstAttribute="top" secondItem="rue-uo-5Xt" secondAttribute="bottom" constant="30" id="PGD-VX-yBh"/>
+                            <constraint firstItem="D4J-hg-ldV" firstAttribute="bottom" secondItem="Gsc-ee-Cgb" secondAttribute="bottom" constant="95" id="Y1J-Ku-Pbu"/>
                             <constraint firstItem="rue-uo-5Xt" firstAttribute="leading" secondItem="D4J-hg-ldV" secondAttribute="leading" id="Ywv-VC-cRF"/>
-                            <constraint firstItem="h6d-3G-QHU" firstAttribute="leading" secondItem="D4J-hg-ldV" secondAttribute="leading" id="nAT-vr-RoW"/>
+                            <constraint firstItem="EP7-pj-g2h" firstAttribute="leading" secondItem="D4J-hg-ldV" secondAttribute="leading" constant="20" id="hla-UL-d9m"/>
+                            <constraint firstItem="Gsc-ee-Cgb" firstAttribute="top" secondItem="EP7-pj-g2h" secondAttribute="bottom" constant="95" id="qkK-xf-uLQ"/>
                             <constraint firstItem="rue-uo-5Xt" firstAttribute="trailing" secondItem="D4J-hg-ldV" secondAttribute="trailing" id="uBl-xj-rFy"/>
-                            <constraint firstItem="h6d-3G-QHU" firstAttribute="bottom" secondItem="D4J-hg-ldV" secondAttribute="bottom" id="xJe-0A-v77"/>
-                            <constraint firstItem="h6d-3G-QHU" firstAttribute="trailing" secondItem="D4J-hg-ldV" secondAttribute="trailing" id="y8M-fU-jek"/>
+                            <constraint firstItem="D4J-hg-ldV" firstAttribute="bottom" secondItem="EP7-pj-g2h" secondAttribute="bottom" constant="235" id="uvm-uo-FCu"/>
                             <constraint firstItem="D4J-hg-ldV" firstAttribute="bottom" secondItem="rue-uo-5Xt" secondAttribute="bottom" constant="546" id="yME-HK-hxG"/>
+                            <constraint firstItem="D4J-hg-ldV" firstAttribute="trailing" secondItem="EP7-pj-g2h" secondAttribute="trailing" constant="20" id="yUj-yL-vuY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="D4J-hg-ldV"/>
                     </view>
@@ -153,13 +180,16 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Search for Games" borderStyle="bezel" textAlignment="natural" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="Kp4-hV-VQS">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="39"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="idT-66-b83">
+                                        <rect key="frame" x="0.0" y="49" width="414" height="216"/>
+                                    </pickerView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pZE-3U-KFU">
-                                        <rect key="frame" x="0.0" y="50" width="414" height="675"/>
+                                        <rect key="frame" x="0.0" y="275" width="414" height="450"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cHD-3F-Vng">
                                             <size key="itemSize" width="128" height="128"/>

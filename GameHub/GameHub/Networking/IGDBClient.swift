@@ -9,26 +9,124 @@
 import Foundation
 
 class IGDBClient {
-    let apiKey = "66c9afc004a2805ee2e1a56ad304f958"
-    let base = "https://api-v3.igdb.com"
-    let appName = "TUM's App"
     
-    func getGames(completionHandler: @escaping (_ success: Bool, _ errorString: String?, Data?) -> Void) {
-        let url = URL(string: "https://api-v3.igdb.com/games")!
+    // MARK: - Properties
+    let apiKey = "66c9afc004a2805ee2e1a56ad304f958"
+    
+    // MARK: - Endpoints
+    enum Endpoints {
+        static let base = "https://api-v3.igdb.com"
+        
+        case genre
+        case games
+        case covers
+        
+        var stringValue: String {
+            switch self {
+            case .genre: return Endpoints.base + "/genres"
+            case .games: return Endpoints.base + "/games"
+            case .covers: return Endpoints.base + "/covers"
+            }
+        }
+        
+        var url: URL {
+            return URL(string: stringValue)!
+        }
+    }
+    
+    // MARK: - getSearchResponse
+    class func getSearchResponse(gameName: String, completionHandler:@escaping(Data?,Error?) -> Void){
+        let url = Endpoints.games.url
         let session = URLSession.shared
         
         var requestHeader = URLRequest(url: url)
-        requestHeader.httpBody = "fields age_ratings,aggregated_rating,aggregated_rating_count,alternative_names,artworks,bundles,category,checksum,collection,cover,created_at,dlcs,expansions,external_games,first_release_date,follows,franchise,franchises,game_engines,game_modes,genres,hypes,involved_companies,keywords,multiplayer_modes,name,parent_game,platforms,player_perspectives,popularity,pulse_count,rating,rating_count,release_dates,screenshots,similar_games,slug,standalone_expansions,status,storyline,summary,tags,themes,time_to_beat,total_rating,total_rating_count,updated_at,url,version_parent,version_title,videos,websites;".data(using: .utf8, allowLossyConversion: false)
+        requestHeader.httpBody = "search \"\(gameName)\"; fields name, id;".data(using: .utf8, allowLossyConversion: false)
         requestHeader.httpMethod = "POST"
-        requestHeader.setValue(apiKey, forHTTPHeaderField: "user-key")
+        requestHeader.setValue("66c9afc004a2805ee2e1a56ad304f958", forHTTPHeaderField: "user-key")
         requestHeader.setValue("application/json", forHTTPHeaderField: "Accept")
         
         let task = session.dataTask(with: requestHeader as URLRequest) { (data, response, error) in
             guard let data = data else {
-                completionHandler(false, error?.localizedDescription, nil)
+                completionHandler(nil, error?.localizedDescription as? Error)
                 return
             }
-            completionHandler(true, nil, data)
+            completionHandler(data, nil)
+        }
+        task.resume()
+    }
+    
+    // MARK: - getGameData
+    class func getGameData(gameId: Int, completion: @escaping (Data?, Error?) -> Void) {
+        let url = Endpoints.games.url
+        let session = URLSession.shared
+        
+        var requestHeader = URLRequest(url: url)
+        requestHeader.httpBody = "fields cover, name; where id = \(gameId);".data(using: .utf8, allowLossyConversion: false)
+        requestHeader.httpMethod = "POST"
+        requestHeader.setValue("66c9afc004a2805ee2e1a56ad304f958", forHTTPHeaderField: "user-key")
+        requestHeader.setValue("application/json", forHTTPHeaderField: "Accept")
+        
+        let task = session.dataTask(with: requestHeader as URLRequest) { (data, response, error) in
+            guard let data = data else {
+                completion(nil, error?.localizedDescription as? Error)
+                return
+            }
+            completion(data, nil)
+        }
+        task.resume()
+        
+    }
+    
+    // MARK: - getCovers
+    class func getCovers(gameId: Int, completion: @escaping (Data?, Error?) -> Void) {
+        let url = Endpoints.covers.url
+        let session = URLSession.shared
+        
+        var requestHeader = URLRequest(url: url)
+        requestHeader.httpBody = "fields game, url; where game = \(gameId);".data(using: .utf8, allowLossyConversion: false)
+        requestHeader.httpMethod = "POST"
+        requestHeader.setValue("66c9afc004a2805ee2e1a56ad304f958", forHTTPHeaderField: "user-key")
+        requestHeader.setValue("application/json", forHTTPHeaderField: "Accept")
+        
+        let task = session.dataTask(with: requestHeader as URLRequest) { (data, response, error) in
+            guard let data = data else {
+                completion(nil, error?.localizedDescription as? Error)
+                return
+            }
+            completion(data, nil)
+        }
+        task.resume()
+    }
+    
+    // MARK: - getGenres
+    class func getGenres(completion: @escaping (Data?, Error?)->Void) {
+        let url = Endpoints.genre.url
+        let session = URLSession.shared
+        
+        var requestHeader = URLRequest(url: url)
+        requestHeader.httpBody = "fields name;".data(using: .utf8, allowLossyConversion: false)
+        requestHeader.httpMethod = "POST"
+        requestHeader.setValue("66c9afc004a2805ee2e1a56ad304f958", forHTTPHeaderField: "user-key")
+        requestHeader.setValue("application/json", forHTTPHeaderField: "Accept")
+        
+        let task = session.dataTask(with: requestHeader as URLRequest) { (data, response, error) in
+            guard let data = data else {
+                completion(nil, error?.localizedDescription as? Error)
+                return
+            }
+            completion(data, nil)
+        }
+        task.resume()
+    }
+    
+    class func getData(from url: URL, completion: @escaping (Data?, Error?) -> Void) {
+        let session = URLSession.shared
+        let task = session.dataTask(with: url) { (data, response, error) in
+            guard let data = data else {
+                completion(nil, error?.localizedDescription as? Error)
+                return
+            }
+            completion(data, nil)
         }
         task.resume()
     }

@@ -84,7 +84,7 @@
                                 <rect key="frame" x="20" y="257" width="374" height="552"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sxk-W8-NFd">
-                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="itemSize" width="374" height="215"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -98,14 +98,14 @@
                                 </label>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewCell" id="6ny-2t-IK7" customClass="CollectionCell" customModule="VirtualTourist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="215"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hGo-86-Mo9">
-                                            <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="215"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VirtualTourist_120" translatesAutoresizingMaskIntoConstraints="NO" id="JNJ-HW-6zy" userLabel="Photo">
-                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="215"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="120" id="3My-Hk-c29"/>
                                                         <constraint firstAttribute="height" constant="120" id="c3p-Jy-2Az"/>
@@ -119,6 +119,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="JNJ-HW-6zy" secondAttribute="trailing" id="mA5-7M-o38"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <size key="customSize" width="374" height="215"/>
                                         <connections>
                                             <outlet property="imageView" destination="JNJ-HW-6zy" id="foX-JL-LbO"/>
                                         </connections>

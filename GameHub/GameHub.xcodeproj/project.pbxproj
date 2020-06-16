@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		392821CF2498EDB100C1AEB5 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392821CE2498EDB100C1AEB5 /* CollectionCell.swift */; };
 		39632214248E50370069CA60 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39632213248E50370069CA60 /* ListViewController.swift */; };
 		39632216248E50420069CA60 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39632215248E50420069CA60 /* DetailViewController.swift */; };
 		39632218248E50550069CA60 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39632217248E50550069CA60 /* SearchViewController.swift */; };
 		3963221A248E505F0069CA60 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39632219248E505F0069CA60 /* ShareViewController.swift */; };
 		3963221C248E5B810069CA60 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3963221B248E5B810069CA60 /* ListCell.swift */; };
-		3963221E248E5B8E0069CA60 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3963221D248E5B8E0069CA60 /* SearchCell.swift */; };
 		39CE02F8248DB357006CF4D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CE02F7248DB357006CF4D6 /* AppDelegate.swift */; };
 		39CE02FA248DB357006CF4D6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CE02F9248DB357006CF4D6 /* SceneDelegate.swift */; };
 		39CE02FF248DB357006CF4D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39CE02FD248DB357006CF4D6 /* Main.storyboard */; };
@@ -20,17 +20,17 @@
 		39CE0304248DB35B006CF4D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39CE0303248DB35B006CF4D6 /* Assets.xcassets */; };
 		39CE0307248DB35B006CF4D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39CE0305248DB35B006CF4D6 /* LaunchScreen.storyboard */; };
 		39CE0313248DB3FD006CF4D6 /* IGDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CE0312248DB3FD006CF4D6 /* IGDBClient.swift */; };
-		39CE0315248DB417006CF4D6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CE0314248DB417006CF4D6 /* Constants.swift */; };
 		39CE0317248DB764006CF4D6 /* IGDBData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CE0316248DB764006CF4D6 /* IGDBData.swift */; };
+		39FC626E249144B100281367 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FC626D249144B100281367 /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		392821CE2498EDB100C1AEB5 /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		39632213248E50370069CA60 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		39632215248E50420069CA60 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		39632217248E50550069CA60 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		39632219248E505F0069CA60 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		3963221B248E5B810069CA60 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
-		3963221D248E5B8E0069CA60 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		39CE02F4248DB357006CF4D6 /* GameHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39CE02F7248DB357006CF4D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39CE02F9248DB357006CF4D6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,8 +40,8 @@
 		39CE0306248DB35B006CF4D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39CE0308248DB35B006CF4D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39CE0312248DB3FD006CF4D6 /* IGDBClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGDBClient.swift; sourceTree = "<group>"; };
-		39CE0314248DB417006CF4D6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		39CE0316248DB764006CF4D6 /* IGDBData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGDBData.swift; sourceTree = "<group>"; };
+		39FC626D249144B100281367 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +89,6 @@
 			isa = PBXGroup;
 			children = (
 				39CE0300248DB357006CF4D6 /* GameHub.xcdatamodeld */,
-				39CE0314248DB417006CF4D6 /* Constants.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -98,7 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				3963221B248E5B810069CA60 /* ListCell.swift */,
-				3963221D248E5B8E0069CA60 /* SearchCell.swift */,
+				392821CE2498EDB100C1AEB5 /* CollectionCell.swift */,
 				39CE02FD248DB357006CF4D6 /* Main.storyboard */,
 				39CE0303248DB35B006CF4D6 /* Assets.xcassets */,
 				39CE0305248DB35B006CF4D6 /* LaunchScreen.storyboard */,
@@ -113,6 +112,7 @@
 				39632215248E50420069CA60 /* DetailViewController.swift */,
 				39632217248E50550069CA60 /* SearchViewController.swift */,
 				39632219248E505F0069CA60 /* ShareViewController.swift */,
+				39FC626D249144B100281367 /* TabBarController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -198,14 +198,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				39CE0313248DB3FD006CF4D6 /* IGDBClient.swift in Sources */,
-				3963221E248E5B8E0069CA60 /* SearchCell.swift in Sources */,
+				39FC626E249144B100281367 /* TabBarController.swift in Sources */,
+				392821CF2498EDB100C1AEB5 /* CollectionCell.swift in Sources */,
 				39CE0302248DB357006CF4D6 /* GameHub.xcdatamodeld in Sources */,
 				3963221A248E505F0069CA60 /* ShareViewController.swift in Sources */,
 				39CE02F8248DB357006CF4D6 /* AppDelegate.swift in Sources */,
 				39632218248E50550069CA60 /* SearchViewController.swift in Sources */,
 				39CE02FA248DB357006CF4D6 /* SceneDelegate.swift in Sources */,
 				3963221C248E5B810069CA60 /* ListCell.swift in Sources */,
-				39CE0315248DB417006CF4D6 /* Constants.swift in Sources */,
 				39CE0317248DB764006CF4D6 /* IGDBData.swift in Sources */,
 				39632214248E50370069CA60 /* ListViewController.swift in Sources */,
 				39632216248E50420069CA60 /* DetailViewController.swift in Sources */,

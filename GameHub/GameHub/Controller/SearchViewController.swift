@@ -7,34 +7,88 @@
 //
 
 import UIKit
+import CoreData
 
-class SearchViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class SearchViewController: UIViewController, UITextFieldDelegate {
     
-    let reuseIdentifier = ""
+    // MARK: - Properties
+    @IBOutlet weak var searchView: UICollectionView!
+    @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var textField: UITextField!
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        <#code#>
+    var genres: [Genre] = [Genre]()
+    var foundGames: [TestGame] = [TestGame]()
+    
+    // MARK: - App Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //pickerView.delegate = self
+        textField.delegate = self
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SearchCell
-        
-        cell.cellImageView.image = UIImage()
-        
-        return cell
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        IGDBClient.getGenres { (data, error) in
+            if let data = data {
+                do {
+                    let decoder = JSONDecoder()
+                    let responseObject = try decoder.decode([Genre].self, from: data)
+                    self.genres.append(contentsOf: responseObject)
+                    
+                } catch {
+                    DispatchQueue.main.async {
+                        print(error.localizedDescription)
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    print("Network error")
+                }
+            }
+        }
+        searchView.reloadData()
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath:IndexPath) {
-        // Grab the DetailVC from Storyboard
-        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        
-        // Set meme in DetailVC from current tapped meme
-        
-        self.dataContainer.viewContext.delete(self.fetchedResultsController.object(at: indexPath))
-        try! self.dataContainer.viewContext.save()
-        
-        // Present the view controller using navigation
-        navigationController!.pushViewController(detailController, animated: true)
+    // MARK: - Text Field Delegate
+    @IBOutlet weak var searchTextField: UITextField!
+    var search: String = ""
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        foundGames.removeAll()
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        search = textField.text!
+        IGDBClient.getSearchResponse(gameName: search) { (data, error) in
+            if let data = data {
+                do {
+                    let decoder = JSONDecoder()
+                    let responseObject = try decoder.decode([TestGame].self, from: data)
+                    self.foundGames.append(contentsOf: responseObject)
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "segueCollectionView", sender: self)
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        print(error.localizedDescription)
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    print("Network error")
+                }
+            }
+            
+        }
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueCollectionView" {
+            if let destinationVC = segue.destination as? DetailViewController {
+                destinationVC.foundGames = foundGames
+            }
+        }
+    }
 }

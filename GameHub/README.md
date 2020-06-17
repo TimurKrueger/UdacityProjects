@@ -1,5 +1,3 @@
-# UdacityProjects
-
 General Information
 
 This project is my Capstone project of the iOS Nanodegree program.

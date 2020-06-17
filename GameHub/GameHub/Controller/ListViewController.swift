@@ -12,7 +12,6 @@ import CoreData
 class ListViewController: UITableViewController {
     
     // MARK: - Properties
-    @IBOutlet weak var listView: UITableView!
     var games: [NSManagedObject] = []
     
     // MARK: - App Lifecycle
@@ -34,7 +33,7 @@ class ListViewController: UITableViewController {
         do {
             games = try managedContext.fetch(fetchRequest)
         } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
+            self.showAlert(message: "Could not fetch! \(error.localizedDescription)")
         }
         listView.reloadData()
     }
@@ -110,5 +109,12 @@ class ListViewController: UITableViewController {
             }
         }
         self.present(activityViewController, animated: true, completion: nil)
+    }
+    
+    // MARK: - User Response Alert
+    func showAlert(message: String) {
+        let alertVC = UIAlertController(title: "Error Message", message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        show(alertVC, sender: nil)
     }
 }

@@ -51,12 +51,12 @@ class DetailViewController: UITableViewController {
                             }
                         } catch {
                             DispatchQueue.main.async {
-                                print(error.localizedDescription)
+                                self.showAlert(message: "Invalid Input!")
                             }
                         }
                     } else {
                         DispatchQueue.main.async {
-                            print("Network error")
+                            self.showAlert(message: "Network Error!")
                         }
                     }
                 }
@@ -127,7 +127,7 @@ class DetailViewController: UITableViewController {
             self.saveGameToFavourites(game: self.foundGames[indexPath.item])
             
             DispatchQueue.main.async {
-                let alertTwo = UIAlertController(title: "Success adding game.", message: "", preferredStyle: .alert)
+                let alertTwo = UIAlertController(title: "Success, added game!", message: "", preferredStyle: .alert)
                 alertTwo.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { action in
                     return
                 }))
@@ -165,9 +165,15 @@ class DetailViewController: UITableViewController {
         
         do {
             try managedContext.save()
-            print("Saving game: \(game.name)!")
         } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
+            self.showAlert(message: "Could not fetch! \(error.localizedDescription)")
         }
+    }
+    
+    // MARK: - User Response Alert
+    func showAlert(message: String) {
+        let alertVC = UIAlertController(title: "Error Message", message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        show(alertVC, sender: nil)
     }
 }

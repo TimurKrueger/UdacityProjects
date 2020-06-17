@@ -73,12 +73,12 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
                     }
                 } catch {
                     DispatchQueue.main.async {
-                        print(error.localizedDescription)
+                        self.showAlert(message: "Invalid input!")
                     }
                 }
             } else {
                 DispatchQueue.main.async {
-                    print("Network error")
+                    self.showAlert(message: "Network error!")
                 }
             }
         }
@@ -101,15 +101,14 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
                     }
                 } catch {
                     DispatchQueue.main.async {
-                        print(error.localizedDescription)
+                        self.showAlert(message: "Invalid input!")
                     }
                 }
             } else {
                 DispatchQueue.main.async {
-                    print("Network error")
+                    self.showAlert(message: "Network error!")
                 }
             }
-            
         }
     }
     
@@ -137,5 +136,12 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
                 destinationVC.foundGames = foundGames
             }
         }
+    }
+    
+    // MARK: - User Response Alert
+    func showAlert(message: String) {
+        let alertVC = UIAlertController(title: "Error Message", message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        show(alertVC, sender: nil)
     }
 }

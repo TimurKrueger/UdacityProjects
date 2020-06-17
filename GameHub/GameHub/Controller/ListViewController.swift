@@ -12,6 +12,7 @@ import CoreData
 class ListViewController: UITableViewController {
     
     // MARK: - Properties
+    @IBOutlet weak var listView: UITableView!
     var games: [NSManagedObject] = []
     
     // MARK: - App Lifecycle

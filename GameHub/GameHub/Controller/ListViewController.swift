@@ -11,50 +11,104 @@ import CoreData
 
 class ListViewController: UITableViewController {
     
+    // MARK: - Properties
     @IBOutlet weak var listView: UITableView!
-    //var games: [Game] = []
+    var games: [NSManagedObject] = []
     
+    // MARK: - App Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        listView.register(UITableViewCell.self, forCellReuseIdentifier: "listCell")
         listView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //1
-       /* guard let appDelegate =
+        
+        guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
                 return
         }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "ListGameObject")
         
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        
-        //2
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "Game")
-        
-        //3
         do {
             games = try managedContext.fetch(fetchRequest)
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
-        */
         listView.reloadData()
     }
     
+    // MARK: - Table View Delegate
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return games.count
-        return 1
+        return games.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let game = games[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath)
-        //cell.textLabel?.text = game.value(forKeyPath: "name") as? String
+        let game = games[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as! ListCell
+        
+        cell.cellName.text = game.value(forKeyPath: "name") as? String
+        
+        let gamePopularity = game.value(forKey: "popularity") as! Double
+        let popularity = Double(round(1000 * gamePopularity) / 1000)
+        
+        cell.cellPopularity.text = "Popularity: \(String(popularity))"
+        
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let alert = UIAlertController(title: "Share Game", message: "Visit the website of the game or share it with your friends.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Share", style: .default, handler: { action in
+            self.shareGame(index: indexPath)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Visit", style: .default, handler: { action in
+            self.visitWebsite(index: indexPath)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            self.dismiss(animated: true)
+        }))
+        
+        DispatchQueue.main.async {
+            self.present(alert, animated: true)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let delegate = UIApplication.shared.delegate as! AppDelegate
+            let context = delegate.persistentContainer.viewContext
+            let commit = games[indexPath.row]
+            context.delete(commit)
+            games.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            try! context.save()
+        }
+        self.tableView.reloadData()
+    }
+    
+    // MARK: - Website Action
+    func visitWebsite(index: IndexPath) {
+        let game = games[index.row]
+        let url = game.value(forKey: "url") as? String
+        UIApplication.shared.open(URL(string: url!)!, options: [:], completionHandler: nil)
+    }
+    
+    func shareGame(index: IndexPath) {
+        let game = games[index.row]
+        let url = game.value(forKey: "url") as? String
+        let activityViewController = UIActivityViewController(activityItems: [url!], applicationActivities: nil)
+        
+        activityViewController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) -> Void in
+            if completed {
+                // Todo - Test Message send on real phone
+                print("success")
+            }
+        }
+        self.present(activityViewController, animated: true, completion: nil)
     }
 }

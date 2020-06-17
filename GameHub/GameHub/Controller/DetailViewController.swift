@@ -9,15 +9,12 @@
 import UIKit
 import CoreData
 
-class DetailViewController: UICollectionViewController {
+class DetailViewController: UITableViewController {
     
     // MARK: - Properties
-    var foundGames: [TestGame] = [TestGame]()
-    var covers: [Covers] = [Covers]()
+    var foundGames: [Game] = [Game]()
+    var coverUrl: [CoverURL] = [CoverURL]()
     var images: [CoverImages] = [CoverImages]()
-    
-    var blockOperation = BlockOperation()
-    var dispatchGroup = DispatchGroup()
     
     // MARK: - App Lifecycle
     override func viewDidLoad() {
@@ -27,111 +24,148 @@ class DetailViewController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setupImages()
-        self.collectionView.reloadData()
+        self.tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        foundGames.removeAll()
+        coverUrl.removeAll()
+        images.removeAll()
     }
     
     func setupImages() {
         let nameArrayLength = foundGames.count
-        
-        for index in 1..<nameArrayLength {
-            IGDBClient.getCovers(gameId: foundGames[index].id) { (data, error) in
-                if let data = data {
-                    do {
-                        let decoder = JSONDecoder()
-                        let responseObject = try decoder.decode([Covers].self, from: data)
-                        self.covers.append(contentsOf: responseObject)
-
-                        self.downloadCovers()
-                        DispatchQueue.main.async {
-                            self.collectionView.reloadData()
+        if(nameArrayLength != 0) {
+            for index in 1..<nameArrayLength {
+                IGDBClient.getCovers(gameId: foundGames[index].id) { (data, error) in
+                    if let data = data {
+                        do {
+                            let decoder = JSONDecoder()
+                            let responseObject = try decoder.decode([CoverURL].self, from: data)
+                            self.coverUrl.append(contentsOf: responseObject)
+                            self.downloadCoverImages()
+                            
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                        } catch {
+                            DispatchQueue.main.async {
+                                print(error.localizedDescription)
+                            }
                         }
-                    } catch {
+                    } else {
                         DispatchQueue.main.async {
-                            print(error.localizedDescription)
+                            print("Network error")
                         }
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        print("Network error")
                     }
                 }
-                
+                self.tableView.reloadData()
             }
-            self.collectionView.reloadData()
         }
+        self.tableView.reloadData()
     }
     
-    func downloadCovers(){
-        let nameArrayLength = covers.count
+    func downloadCoverImages(){
+        let nameArrayLength = coverUrl.count
         for index in 1..<nameArrayLength {
-            
-            let string = covers[index].url
-            
+            let string = coverUrl[index].url
             let index_ = string.index(string.startIndex, offsetBy: 2)
             let mySubstring = "https://" + string.suffix(from: index_)
-            print("My URL: ", mySubstring)
             
             let url = URL(string: String(mySubstring))!
-            
-            downloadImage(gameId: covers[index].game, from: url)
+            downloadImage(gameId: coverUrl[index].game, from: url)
         }
     }
     
     func downloadImage(gameId: Int, from url: URL) {
-        print("Download Started")
-        
         IGDBClient.getData(from: url) { data, error in
             guard let data = data, error == nil else {
                 return
             }
-            print("Download Finished")
-            
-            DispatchQueue.main.async() { [weak self] in
+            DispatchQueue.main.async {
                 let temp: CoverImages = CoverImages(id: gameId, image: UIImage(data: data))
-                self?.images.append(temp)
+                self.images.append(temp)
+                self.tableView.reloadData()
             }
         }
     }
     
-    // MARK: - Collection View Delegate
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    // MARK: - Table View Delegate
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return foundGames.count
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! CollectionCell
-        print("Count games: ",foundGames.count)
-        print("Count images: ", images.count)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "collectionCell", for: indexPath) as! CollectionCell
         
         let game = self.foundGames[indexPath.item]
         cell.cellName.text = game.name
         
+        let popularity = Double(round(1000 * game.popularity) / 1000)
+        cell.cellPopularity.text = "Popularity: " + String(popularity)
+        
         if(images.count != 0){
             for index in 1..<images.count {
                 if(foundGames[indexPath.item].id == images[index].id) {
-                    let gameCover = self.images[index]
-                    cell.cellImageView.image = gameCover.image
+                    DispatchQueue.main.async {
+                        let gameCover = self.images[index]
+                        cell.cellImageView.image = gameCover.image
+                    }
                 }
             }
         }
         return cell
     }
     
-    @IBAction func debug_(_ sender: Any) {
-        for (index, element) in foundGames.enumerated() {
-            print("Item \(index): \(element)")
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let alert = UIAlertController(title: "Save Game", message: "Do you want to add \"\(foundGames[indexPath.item].name)\" to the favourite list?", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+            self.saveGameToFavourites(game: self.foundGames[indexPath.item])
+            
+            DispatchQueue.main.async {
+                let alertTwo = UIAlertController(title: "Success adding game.", message: "", preferredStyle: .alert)
+                alertTwo.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { action in
+                    return
+                }))
+                
+                DispatchQueue.main.async {
+                    self.present(alertTwo, animated: true)
+                }
+            }
+        }))
+        
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { action in
+            return
+        }))
+        
+        DispatchQueue.main.async {
+            self.present(alert, animated: true)
+        }
+    }
+    
+    // MARK: - Data Persistence
+    func saveGameToFavourites(game: Game) {
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
         }
         
-        for (index, element) in covers.enumerated() {
-            print("Item \(index): \(element)")
-        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "ListGameObject", in: managedContext)!
+        let saveGame = NSManagedObject(entity: entity, insertInto: managedContext)
         
-        for(index, element) in images.enumerated() {
-            print("Item \(index): \(element)")
+        saveGame.setValue(game.id, forKeyPath: "id")
+        saveGame.setValue(game.name, forKeyPath: "name")
+        saveGame.setValue(game.popularity, forKeyPath: "popularity")
+        saveGame.setValue(game.url, forKeyPath: "url")
+        
+        do {
+            try managedContext.save()
+            print("Saving game: \(game.name)!")
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
         }
     }
 }

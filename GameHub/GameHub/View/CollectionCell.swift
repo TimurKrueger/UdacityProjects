@@ -8,7 +8,8 @@
 
 import UIKit
 
-class CollectionCell: UICollectionViewCell {
+class CollectionCell: UITableViewCell {
     @IBOutlet weak var cellName: UILabel!
     @IBOutlet weak var cellImageView: UIImageView!
+    @IBOutlet weak var cellPopularity: UILabel!
 }

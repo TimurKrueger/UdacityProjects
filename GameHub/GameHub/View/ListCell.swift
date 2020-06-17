@@ -10,4 +10,5 @@ import UIKit
 
 class ListCell: UITableViewCell {
     @IBOutlet weak var cellName: UILabel!
+    @IBOutlet weak var cellPopularity: UILabel!
 }

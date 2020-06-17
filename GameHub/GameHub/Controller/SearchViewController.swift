@@ -128,7 +128,6 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         currentPickerField = genreFields[row].self.id
-        print(currentPickerField)
     }
     
     // MARK: - Segue to Table View

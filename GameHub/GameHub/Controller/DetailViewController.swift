@@ -68,13 +68,15 @@ class DetailViewController: UITableViewController {
     
     func downloadCoverImages(){
         let nameArrayLength = coverUrl.count
-        for index in 1..<nameArrayLength {
-            let string = coverUrl[index].url
-            let index_ = string.index(string.startIndex, offsetBy: 2)
-            let mySubstring = "https://" + string.suffix(from: index_)
-            
-            let url = URL(string: String(mySubstring))!
-            downloadImage(gameId: coverUrl[index].game, from: url)
+        if(nameArrayLength != 0){
+            for index in 1..<nameArrayLength {
+                let string = coverUrl[index].url
+                let index_ = string.index(string.startIndex, offsetBy: 2)
+                let mySubstring = "https://" + string.suffix(from: index_)
+                
+                let url = URL(string: String(mySubstring))!
+                downloadImage(gameId: coverUrl[index].game, from: url)
+            }
         }
     }
     

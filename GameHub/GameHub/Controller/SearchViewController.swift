@@ -28,7 +28,6 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         genreFields.append(Genre(id: 5, name: "Shooter"))
         genreFields.append(Genre(id: 14, name: "Sport"))
         genreFields.append(Genre(id: 33, name: "Arcade"))
-        genreFields.append(Genre(id: 13, name: "Simulator"))
         genreFields.append(Genre(id: 12, name: "RPG"))
         genreFields.append(Genre(id: 36, name: "Moba"))
         genreFields.append(Genre(id: 32, name: "Indie"))
